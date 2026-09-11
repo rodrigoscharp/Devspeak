@@ -1,0 +1,17 @@
+{
+  "name": "devspeak",
+  "owner": {
+    "name": "Rodrigo Scharp",
+    "url": "https://github.com/rodrigoscharp"
+  },
+  "description": "Marketplace for the Devspeak plugin: a technical English coach for Brazilian devs.",
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "devspeak",
+      "source": "./",
+      "displayName": "Devspeak",
+      "description": "Technical English coach for Brazilian devs practicing for international remote jobs."
+    }
+  ]
+}

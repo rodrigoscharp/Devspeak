@@ -1,0 +1,40 @@
+{
+  "name": "devspeak",
+  "displayName": "Devspeak",
+  "version": "0.1.0",
+  "description": "Technical English coach for Brazilian devs practicing for international remote jobs, via role-play with a fictional international team.",
+  "author": {
+    "name": "Rodrigo Scharp",
+    "url": "https://github.com/rodrigoscharp"
+  },
+  "repository": "https://github.com/rodrigoscharp/devspeak",
+  "license": "MIT",
+  "keywords": [
+    "english",
+    "language-learning",
+    "role-play",
+    "career",
+    "interview-prep",
+    "brazil"
+  ],
+  "userConfig": {
+    "level": {
+      "type": "string",
+      "title": "English level (CEFR)",
+      "description": "auto (estimated from your performance), or A2, B1, B2, C1",
+      "default": "auto"
+    },
+    "correction_mode": {
+      "type": "string",
+      "title": "Correction mode",
+      "description": "end (feedback only at the end of the session) or inline (brief correction after each of your turns)",
+      "default": "end"
+    },
+    "explanation_language": {
+      "type": "string",
+      "title": "Explanation language",
+      "description": "Language used for feedback explanations: pt-BR or en",
+      "default": "pt-BR"
+    }
+  }
+}
