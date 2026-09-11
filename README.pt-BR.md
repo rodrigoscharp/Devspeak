@@ -1,0 +1,92 @@
+# Devspeak
+
+Um plugin para Claude Code que treina devs brasileiros em inglês técnico para vagas remotas internacionais — através de role-play com um time internacional fictício, praticando com o seu próprio código real.
+
+[Read in English (README.md)](README.md)
+
+## Por quê
+
+A maioria das ferramentas de prática de inglês para devs é genérica. O Devspeak é diferente em dois pontos:
+
+1. **Você pratica com o seu próprio código.** `/devspeak:explain-code` e `/devspeak:pr-talk` usam o seu `git diff` real, então você ensaia explicar ou defender *o seu trabalho de verdade* — do jeito que você precisaria fazer numa daily, num PR review ou numa call de incidente.
+2. **Feito para quem fala português.** O feedback é explicado em PT-BR por padrão, e o coach usa um banco com mais de 50 erros típicos de falantes de português (falsos cognatos, tempos verbais, preposições, ordem de substantivos, jargão de dev) para explicar *por que* algo soou estranho, não só *que* soou.
+
+Tudo roda localmente, na sua própria assinatura do Claude — sem servidor, sem API key. Seu histórico de prática fica só na sua máquina.
+
+## Exemplo de sessão
+
+```
+> /devspeak:standup
+
+Sarah: Morning! Let's do a quick standup — what did you work on yesterday?
+
+Você: Yesterday I fix the login bug and I working on the API since morning.
+
+Sarah: Nice, glad that's sorted. What's the plan for the rest of today then?
+
+Você: today I finish the API and start review the PR from Priya
+
+Sarah: Sounds good. Any blockers on the PR review, or should be quick?
+
+Você: done
+
+Sarah: Alright, let's wrap up the role-play here.
+
+---
+**Nível estimado: A2** — estrutura ontem/hoje clara, mas a mistura de tempos
+verbais ("I fix", "I working") acontece com frequência suficiente para
+dificultar o entendimento de quem ouve.
+
+| Você disse                     | Forma natural                          | Por quê |
+|----------------------------------|------------------------------------------|---------|
+| "I fix the login bug"            | "I fixed the login bug"                  | Ação concluída no passado → simple past, não presente. |
+| "I working on the API"           | "I've been working on the API"           | Ação contínua desde um ponto no passado → present perfect continuous. |
+| "start review the PR"            | "start reviewing the PR"                 | Depois de "start", use gerúndio (-ing). |
+...
+```
+
+## Instalação
+
+```
+/plugin marketplace add rodrigoscharp/devspeak
+/plugin install devspeak@devspeak
+```
+
+## Comandos
+
+| Comando | O que faz |
+|---|---|
+| `/devspeak:standup` | Pratica uma daily standup com a Sarah (tech lead). Usa `git log --since=yesterday` como contexto se você estiver num repo git. |
+| `/devspeak:explain-code [arquivo\|--staged]` | Explica uma mudança real de código para a Sarah — mudanças não commitadas por padrão, `--staged`, ou um arquivo específico. |
+| `/devspeak:pr-talk` | Responde aos comentários de review da Priya (engenheira sênior) no seu diff atual. |
+| `/devspeak:smalltalk` | Papo casual de sexta-feira com um colega de time aleatório — sem pressão técnica. |
+| `/devspeak:practice <scenario-id>` | Vai direto para qualquer cenário. Rode sem argumento para listar todos. |
+| `/devspeak:progress` | Veja seu histórico de sessões, evolução de nível, principais erros recorrentes e sugestão do próximo cenário. |
+
+O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando.
+
+## Configuração
+
+Defina ao instalar, ou depois via `/plugin`:
+
+| Opção | Valores | Padrão |
+|---|---|---|
+| `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimado pelo seu desempenho) |
+| `correction_mode` | `end`, `inline` | `end` (feedback só no fim da sessão) |
+| `explanation_language` | `pt-BR`, `en` | `pt-BR` |
+
+## Privacidade
+
+O Devspeak roda inteiramente na sua máquina, usando a sua assinatura do Claude. Não há servidor nem API key para configurar. Seu histórico de prática (`progress.json`) fica salvo localmente no diretório de dados do plugin e nunca é enviado para lugar nenhum pelo Devspeak.
+
+## Roadmap
+
+Veja [ROADMAP.md](ROADMAP.md) para o que está planejado além da versão atual: um modo passivo que revisa seus prompts em inglês do dia a dia, vocabulário com repetição espaçada, um MCP de voz opcional e avaliação de pronúncia por fonema.
+
+## Contribuindo
+
+Contribuições são bem-vindas, especialmente novos cenários e adições ao banco de erros comuns. Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licença
+
+MIT — veja [LICENSE](LICENSE).
