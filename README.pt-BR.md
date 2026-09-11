@@ -22,9 +22,13 @@ Sarah: Morning! Let's do a quick standup — what did you work on yesterday?
 
 Você: Yesterday I fix the login bug and I working on the API since morning.
 
+[Dica rápida: "I fixed the login bug" (não "I fix") — ação já concluída no passado.]
+
 Sarah: Nice, glad that's sorted. What's the plan for the rest of today then?
 
 Você: today I finish the API and start review the PR from Priya
+
+[Dica rápida: "start reviewing" (não "start review") — depois de "start", use gerúndio.]
 
 Sarah: Sounds good. Any blockers on the PR review, or should be quick?
 
@@ -87,7 +91,7 @@ Defina ao instalar, ou depois via `/plugin`:
 | Opção | Valores | Padrão |
 |---|---|---|
 | `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimado pelo seu desempenho) |
-| `correction_mode` | `end`, `inline` | `end` (feedback só no fim da sessão) |
+| `correction_mode` | `inline`, `end` | `inline` (correção rápida, em `explanation_language`, depois de cada turno seu; `end` dá feedback só no fim da sessão) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
 | `passive_mode` | `true`, `false` | `false` — **opt-in.** Quando ligado, registra silenciosamente prompts em inglês que você escreve no uso normal do Claude Code (fora de role-play), pra `/devspeak:revisar-ingles` analisar depois. |
 | `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — backend de texto-pra-fala do modo de voz (`speak()`). Sem setup pro `system`. |

@@ -22,9 +22,13 @@ Sarah: Morning! Let's do a quick standup — what did you work on yesterday?
 
 You: Yesterday I fix the login bug and I working on the API since morning.
 
+[Dica rápida: "I fixed the login bug" (não "I fix") — ação já concluída no passado.]
+
 Sarah: Nice, glad that's sorted. What's the plan for the rest of today then?
 
 You: today I finish the API and start review the PR from Priya
+
+[Dica rápida: "start reviewing" (não "start review") — depois de "start", use gerúndio.]
 
 Sarah: Sounds good. Any blockers on the PR review, or should be quick?
 
@@ -86,7 +90,7 @@ Set these when installing, or later via `/plugin`:
 | Option | Values | Default |
 |---|---|---|
 | `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimated from your performance) |
-| `correction_mode` | `end`, `inline` | `end` (feedback only at the end of the session) |
+| `correction_mode` | `inline`, `end` | `inline` (brief correction, in `explanation_language`, after each of your turns; `end` gives feedback only at the end of the session) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
 | `passive_mode` | `true`, `false` | `false` — **opt-in.** When on, quietly logs English prompts you write during normal Claude Code usage (outside role-play), so `/devspeak:revisar-ingles` can analyze real, unprompted writing. |
 | `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — text-to-speech backend for voice mode's `speak()`. No setup needed for `system`. |

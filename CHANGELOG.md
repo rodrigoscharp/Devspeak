@@ -2,7 +2,13 @@
 
 All notable changes to this project are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
-## [0.4.0] - 2026-09-11
+## [0.4.1] - 2026-09-11
+
+### Changed
+
+- `correction_mode` now defaults to `inline` instead of `end` — you get a brief correction after each turn during a role-play, not just at the end. Set it to `end` if you'd rather not be interrupted mid-conversation.
+- Inline corrections now explicitly follow `explanation_language` (pt-BR by default) instead of always being written in English.
+- Updated the example session in both READMEs to show what an inline correction actually looks like.
 
 ### Changed — **breaking: command names**
 

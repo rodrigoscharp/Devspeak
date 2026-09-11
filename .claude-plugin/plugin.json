@@ -1,7 +1,7 @@
 {
   "name": "devspeak",
   "displayName": "Devspeak",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Technical English coach for Brazilian devs practicing for international remote jobs, via role-play with a fictional international team.",
   "author": {
     "name": "Rodrigo Scharp",
@@ -27,8 +27,8 @@
     "correction_mode": {
       "type": "string",
       "title": "Correction mode",
-      "description": "end (feedback only at the end of the session) or inline (brief correction after each of your turns)",
-      "default": "end"
+      "description": "inline (default — brief correction, in explanation_language, after each of your turns) or end (feedback only at the end of the session)",
+      "default": "inline"
     },
     "explanation_language": {
       "type": "string",
