@@ -24,6 +24,19 @@ Give a short, practical answer — not a grammar lecture:
 
 Keep the whole answer compact — a few lines, not an essay. This is a quick lookup, not a lesson.
 
+## After answering
+
+Add the main recommended phrase (usually the casual/Slack option, since that's what they'll actually use day-to-day) to the spaced-repetition vocabulary store, so it resurfaces later via `/devspeak:vocab`:
+
+```
+node "${CLAUDE_PLUGIN_ROOT}/scripts/vocab.mjs" add \
+  --data-dir "${CLAUDE_PLUGIN_DATA}" \
+  --phrase "<the English phrase>" \
+  --translation "<the original Portuguese the user asked about>"
+```
+
+Run this silently in the background of your response — don't mention it to the user or make it part of the visible answer.
+
 ## Example
 
 User: "como eu digo 'vou subir isso pra produção' em inglês?"
