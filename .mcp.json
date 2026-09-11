@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "devspeak-voice": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/index.mjs"],
+      "env": {
+        "DEVSPEAK_STT_BACKEND": "${user_config.stt_backend}",
+        "GROQ_API_KEY": "${user_config.groq_api_key}",
+        "DEVSPEAK_WHISPERCPP_BINARY": "${user_config.whispercpp_binary_path}",
+        "DEVSPEAK_WHISPERCPP_MODEL": "${user_config.whispercpp_model_path}",
+        "DEVSPEAK_TTS_BACKEND": "${user_config.tts_backend}",
+        "DEVSPEAK_PIPER_BINARY": "${user_config.piper_binary_path}",
+        "DEVSPEAK_PIPER_VOICE": "${user_config.piper_voice_path}",
+        "ELEVENLABS_API_KEY": "${user_config.elevenlabs_api_key}",
+        "DEVSPEAK_ELEVENLABS_VOICE_ID": "${user_config.elevenlabs_voice_id}"
+      }
+    }
+  }
+}

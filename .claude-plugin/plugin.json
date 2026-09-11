@@ -1,7 +1,7 @@
 {
   "name": "devspeak",
   "displayName": "Devspeak",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Technical English coach for Brazilian devs practicing for international remote jobs, via role-play with a fictional international team.",
   "author": {
     "name": "Rodrigo Scharp",
@@ -41,6 +41,62 @@
       "title": "Passive mode (opt-in)",
       "description": "When enabled, quietly logs English prompts you write during normal Claude Code usage (outside role-play sessions) so /devspeak:english-review can analyze real, unprompted usage. Off by default — nothing is logged unless you turn this on. All data stays local.",
       "default": false
+    },
+    "stt_backend": {
+      "type": "string",
+      "title": "Speech-to-text backend",
+      "description": "groq (default — needs a free groq_api_key, no local install) or whispercpp (fully local/offline, needs whispercpp_binary_path and whispercpp_model_path)",
+      "default": "groq"
+    },
+    "groq_api_key": {
+      "type": "string",
+      "title": "Groq API key",
+      "description": "Free API key from https://console.groq.com/keys, used by listen() when stt_backend is groq. Not needed if you use whispercpp instead.",
+      "sensitive": true,
+      "required": false
+    },
+    "whispercpp_binary_path": {
+      "type": "file",
+      "title": "whisper.cpp binary path",
+      "description": "Path to a compiled whisper.cpp main/whisper-cli binary. Only needed if stt_backend is whispercpp.",
+      "required": false
+    },
+    "whispercpp_model_path": {
+      "type": "file",
+      "title": "whisper.cpp model path",
+      "description": "Path to a whisper.cpp ggml model file (e.g. ggml-base.en.bin). Only needed if stt_backend is whispercpp.",
+      "required": false
+    },
+    "tts_backend": {
+      "type": "string",
+      "title": "Text-to-speech backend",
+      "description": "system (default — uses the OS's built-in TTS, no setup needed), piper (local, needs piper_binary_path and piper_voice_path), or elevenlabs (cloud, higher quality, needs elevenlabs_api_key and elevenlabs_voice_id)",
+      "default": "system"
+    },
+    "piper_binary_path": {
+      "type": "file",
+      "title": "Piper binary path",
+      "description": "Path to the Piper TTS binary. Only needed if tts_backend is piper.",
+      "required": false
+    },
+    "piper_voice_path": {
+      "type": "file",
+      "title": "Piper voice model path",
+      "description": "Path to a Piper .onnx voice model. Only needed if tts_backend is piper.",
+      "required": false
+    },
+    "elevenlabs_api_key": {
+      "type": "string",
+      "title": "ElevenLabs API key",
+      "description": "Only needed if tts_backend is elevenlabs.",
+      "sensitive": true,
+      "required": false
+    },
+    "elevenlabs_voice_id": {
+      "type": "string",
+      "title": "ElevenLabs voice ID",
+      "description": "Only needed if tts_backend is elevenlabs.",
+      "required": false
     }
   }
 }
