@@ -32,6 +32,16 @@ If `level` is `auto`, start at an assumed B1 and adjust your vocabulary/pace up 
    `[Small tip: say "I've been working on it" instead of "I working on it since morning"]`
    Then continue immediately with the in-character response. Keep it to one line — don't break flow into a full lesson.
 
+## Voice mode (optional)
+
+If the `listen` and `speak` MCP tools (from the `devspeak-voice` server) are available in this session, and the user asks to do the session "by voice", "falado", "out loud", or similar, run the role-play as a real spoken conversation instead of text:
+
+- Call `speak` with each persona line instead of (or in addition to) printing it as text — the user should hear the persona talk.
+- Call `listen` (default 8 seconds, adjust up for scenarios that invite longer answers like `one-on-one`) to capture the user's spoken response instead of waiting for typed input. Treat the returned transcript exactly like a typed message for every rule above (level adjustment, Portuguese-input handling, inline corrections, etc.).
+- If either tool call fails (e.g. missing `sox`, no API key configured), tell the user plainly what's missing and continue the session in text mode — never let a voice-setup problem block the practice session itself.
+- Only use voice for the persona's spoken lines and the user's spoken answers; the end-of-session feedback (corrections table, etc.) should stay as regular text — it's meant to be read, not heard.
+- If the tools aren't available at all, just run the session normally in text — don't mention voice mode unprompted.
+
 ## Ending the session
 
 When the session naturally concludes (user hits the turn limit, types `done`/`end`, or the scenario's goals are clearly met), step out of character explicitly (e.g., "Alright, let's wrap up the role-play here.") and produce the feedback using `references/feedback-rubric.md`. That file defines the exact 7-part format, the CEFR level descriptions with dev-context examples, and the two `progress.mjs` commands to run (fetching recurring mistakes, then saving the session). Follow it precisely, including calling both `progress.mjs` commands via Bash.
