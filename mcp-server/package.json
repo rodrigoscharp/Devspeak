@@ -1,0 +1,21 @@
+{
+  "name": "devspeak-voice-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Devspeak's optional voice MCP server: listen() (speech-to-text) and speak() (text-to-speech) tools for spoken role-play practice.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "node build.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.10.0"
+  }
+}
