@@ -3,18 +3,19 @@
 // Data lives at <dataDir>/progress.json (see resolveDataDir).
 
 import { randomUUID } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
-import { homedir } from 'node:os';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
+
+import {
+  parseFlags,
+  printError,
+  readJsonFile,
+  resolveDataDir,
+  writeJsonFileAtomic,
+} from './lib/store.mjs';
+
+export { resolveDataDir };
 
 const MISTAKE_FIELDS = ['category', 'said', 'correct'];
-
-export function resolveDataDir(argv = process.argv.slice(2)) {
-  const flagIndex = argv.indexOf('--data-dir');
-  if (flagIndex !== -1 && argv[flagIndex + 1]) return argv[flagIndex + 1];
-  if (process.env.CLAUDE_PLUGIN_DATA) return process.env.CLAUDE_PLUGIN_DATA;
-  return join(homedir(), '.devspeak');
-}
 
 export function progressFilePath(dataDir) {
   return join(dataDir, 'progress.json');
@@ -26,25 +27,10 @@ function emptyStore() {
 
 export function readProgress(dataDir) {
   const filePath = progressFilePath(dataDir);
-  if (!existsSync(filePath)) return emptyStore();
+  const result = readJsonFile(filePath);
+  if (!result.exists) return emptyStore();
 
-  let raw;
-  try {
-    raw = readFileSync(filePath, 'utf8');
-  } catch (err) {
-    throw new Error(`Could not read progress file at ${filePath}: ${err.message}`);
-  }
-
-  let parsed;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (err) {
-    throw new Error(
-      `Progress file at ${filePath} is corrupted (invalid JSON): ${err.message}. ` +
-        'Fix or remove the file to continue.'
-    );
-  }
-
+  const parsed = result.data;
   if (!parsed || !Array.isArray(parsed.sessions)) {
     throw new Error(`Progress file at ${filePath} is corrupted (missing "sessions" array).`);
   }
@@ -53,11 +39,7 @@ export function readProgress(dataDir) {
 }
 
 export function writeProgress(dataDir, store) {
-  const filePath = progressFilePath(dataDir);
-  mkdirSync(dirname(filePath), { recursive: true });
-  const tmpPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
-  writeFileSync(tmpPath, JSON.stringify(store, null, 2), 'utf8');
-  renameSync(tmpPath, filePath);
+  writeJsonFileAtomic(progressFilePath(dataDir), store);
 }
 
 function validateMistakes(mistakes) {
@@ -135,28 +117,6 @@ export function summary(dataDir) {
     currentLevel: lastSession ? lastSession.level : null,
     recurringMistakes: recurring(dataDir, 5),
   };
-}
-
-function parseFlags(argv) {
-  const flags = {};
-  for (let i = 0; i < argv.length; i += 1) {
-    const arg = argv[i];
-    if (arg.startsWith('--')) {
-      const key = arg.slice(2);
-      const value = argv[i + 1];
-      if (value === undefined || value.startsWith('--')) {
-        flags[key] = true;
-      } else {
-        flags[key] = value;
-        i += 1;
-      }
-    }
-  }
-  return flags;
-}
-
-function printError(message) {
-  process.stderr.write(`Error: ${message}\n`);
 }
 
 function main() {
