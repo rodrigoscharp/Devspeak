@@ -62,8 +62,10 @@ dificultar o entendimento de quem ouve.
 | `/devspeak:smalltalk` | Papo casual de sexta-feira com um colega de time aleatório — sem pressão técnica. |
 | `/devspeak:practice <scenario-id>` | Vai direto para qualquer cenário. Rode sem argumento para listar todos. |
 | `/devspeak:progress` | Veja seu histórico de sessões, evolução de nível, principais erros recorrentes e sugestão do próximo cenário. |
+| `/devspeak:english-review` | Revisa prompts reais em inglês que você escreveu no uso normal (precisa do `passive_mode` ativado, veja abaixo). |
+| `/devspeak:vocab` | Testa o vocabulário que está pra revisar hoje (repetição espaçada). |
 
-O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando.
+O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando. As frases que você pesquisa assim são adicionadas automaticamente na fila de repetição espaçada do `/devspeak:vocab`.
 
 ## Configuração
 
@@ -74,10 +76,11 @@ Defina ao instalar, ou depois via `/plugin`:
 | `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimado pelo seu desempenho) |
 | `correction_mode` | `end`, `inline` | `end` (feedback só no fim da sessão) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
+| `passive_mode` | `true`, `false` | `false` — **opt-in.** Quando ligado, registra silenciosamente prompts em inglês que você escreve no uso normal do Claude Code (fora de role-play), pra `/devspeak:english-review` analisar depois. |
 
 ## Privacidade
 
-O Devspeak roda inteiramente na sua máquina, usando a sua assinatura do Claude. Não há servidor nem API key para configurar. Seu histórico de prática (`progress.json`) fica salvo localmente no diretório de dados do plugin e nunca é enviado para lugar nenhum pelo Devspeak.
+O Devspeak roda inteiramente na sua máquina, usando a sua assinatura do Claude. Não há servidor nem API key para configurar na experiência principal (a prática por voz numa versão futura será a única exceção opt-in — veja [ROADMAP.md](ROADMAP.md)). Seu histórico de prática (`progress.json`), fila de vocabulário (`vocab.json`) e — só se você ativar o `passive_mode` — seus prompts registrados (`passive-log.json`) ficam salvos localmente no diretório de dados do plugin e nunca são enviados para lugar nenhum pelo Devspeak. `passive_mode` vem desligado por padrão; nada é registrado até você ligar.
 
 ## Roadmap
 

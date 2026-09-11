@@ -61,8 +61,10 @@ Sarah: Alright, let's wrap up the role-play here.
 | `/devspeak:smalltalk` | Casual Friday chat with a random teammate — no technical pressure. |
 | `/devspeak:practice <scenario-id>` | Jump straight to any scenario. Run with no argument to list them all. |
 | `/devspeak:progress` | See your session history, level trend, top recurring mistakes, and a suggested next scenario. |
+| `/devspeak:english-review` | Review real English prompts you wrote during normal usage (requires `passive_mode`, see below). |
+| `/devspeak:vocab` | Quiz yourself on vocabulary that's due today (spaced repetition). |
 
-Devspeak also ships a `tech-english-vocab` skill that activates automatically whenever you ask "how do I say X in English?" for a work/technical phrase — no command needed.
+Devspeak also ships a `tech-english-vocab` skill that activates automatically whenever you ask "how do I say X in English?" for a work/technical phrase — no command needed. Phrases you look up this way are automatically added to the spaced-repetition queue for `/devspeak:vocab`.
 
 ## Configuration
 
@@ -73,10 +75,11 @@ Set these when installing, or later via `/plugin`:
 | `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimated from your performance) |
 | `correction_mode` | `end`, `inline` | `end` (feedback only at the end of the session) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
+| `passive_mode` | `true`, `false` | `false` — **opt-in.** When on, quietly logs English prompts you write during normal Claude Code usage (outside role-play), so `/devspeak:english-review` can analyze real, unprompted writing. |
 
 ## Privacy
 
-Devspeak runs entirely on your machine using your existing Claude subscription. There's no backend server and no API key to configure. Your practice history (`progress.json`) is stored locally in the plugin's data directory and is never sent anywhere by Devspeak itself.
+Devspeak runs entirely on your machine using your existing Claude subscription. There's no backend server and no API key to configure for the core coaching experience (voice practice in a future release will be the one opt-in exception — see [ROADMAP.md](ROADMAP.md)). Your practice history (`progress.json`), vocabulary queue (`vocab.json`), and — only if you enable `passive_mode` — your logged prompts (`passive-log.json`) are stored locally in the plugin's data directory and are never sent anywhere by Devspeak itself. `passive_mode` is off by default; nothing is logged unless you turn it on.
 
 ## Roadmap
 

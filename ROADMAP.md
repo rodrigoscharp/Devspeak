@@ -13,18 +13,18 @@ Plugin + marketplace scaffolding, license, base docs.
 - `scripts/progress.mjs`: local, dependency-free progress tracking (`add-session`, `summary`, `recurring`), with `node --test` coverage.
 - 50+ entry Brazilian-Portuguese-speaker common-mistakes bank.
 
-## Phase 2 — Passive mode & spaced repetition (planned)
+## Phase 2 — Passive mode & spaced repetition (done)
 
-- A hook (likely `UserPromptSubmit` or similar) that quietly logs English prompts the user writes during normal Claude Code usage, without interrupting their flow.
-- `/devspeak:english-review` — reviews that logged history and surfaces patterns/mistakes from *real*, unprompted usage, not just role-play sessions.
-- Spaced-repetition vocabulary: track which target phrases and vocab items the user has been shown, and resurface ones they haven't reused recently, timed to actually stick.
+- `UserPromptSubmit` hook (`scripts/passive-log.mjs`) that quietly logs English prompts the user writes during normal Claude Code usage — **opt-in only**, via the `passive_mode` plugin option (off by default). A lightweight EN/PT stopword heuristic filters out slash commands, short text, and Portuguese prompts before anything is stored.
+- `/devspeak:english-review` — reads the unreviewed log, analyzes it against the common-mistakes bank, and feeds findings into the same `progress.mjs` recurring-mistakes tracking used by role-play sessions.
+- Spaced-repetition vocabulary (`scripts/vocab.mjs`): a simple 6-box Leitner scheme. `tech-english-vocab` automatically adds looked-up phrases; `/devspeak:vocab` quizzes whatever's due.
 
-## Phase 3 — Voice practice (planned)
+## Phase 3 — Voice practice (planned, next up)
 
 - A TypeScript MCP server providing `listen()` and `speak()` tools, so role-play can happen out loud instead of by typing.
-- `listen()`: local speech-to-text via whisper.cpp, with Groq Whisper as a faster optional backend.
+- `listen()`: **Groq Whisper as the default** backend (free-tier API key via a `sensitive` userConfig field — no local compilation needed), with whisper.cpp documented as a fully-local/offline alternative for users who prefer zero network calls.
 - `speak()`: text-to-speech via the OS's built-in TTS by default, with Piper (local, offline) or ElevenLabs (higher quality, requires an API key) as optional backends.
-- Keeps the "no server, no required API key" principle for the default path; cloud options stay strictly opt-in.
+- This is the one place Devspeak asks for an API key — clearly opt-in, clearly scoped to voice only, and documented as a deliberate trade-off against the setup friction of compiling whisper.cpp locally.
 
 ## Phase 4 — Pronunciation scoring (planned)
 
