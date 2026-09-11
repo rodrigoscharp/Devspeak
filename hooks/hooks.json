@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": [
+              "node",
+              "${CLAUDE_PLUGIN_ROOT}/scripts/passive-log.mjs",
+              "capture",
+              "--passive-mode",
+              "${user_config.passive_mode}",
+              "--data-dir",
+              "${CLAUDE_PLUGIN_DATA}"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

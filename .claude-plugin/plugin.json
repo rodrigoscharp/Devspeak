@@ -1,7 +1,7 @@
 {
   "name": "devspeak",
   "displayName": "Devspeak",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Technical English coach for Brazilian devs practicing for international remote jobs, via role-play with a fictional international team.",
   "author": {
     "name": "Rodrigo Scharp",
@@ -35,6 +35,12 @@
       "title": "Explanation language",
       "description": "Language used for feedback explanations: pt-BR or en",
       "default": "pt-BR"
+    },
+    "passive_mode": {
+      "type": "boolean",
+      "title": "Passive mode (opt-in)",
+      "description": "When enabled, quietly logs English prompts you write during normal Claude Code usage (outside role-play sessions) so /devspeak:english-review can analyze real, unprompted usage. Off by default — nothing is logged unless you turn this on. All data stays local.",
+      "default": false
     }
   }
 }

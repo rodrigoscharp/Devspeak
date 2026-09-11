@@ -5,7 +5,7 @@
     "url": "https://github.com/rodrigoscharp"
   },
   "description": "Marketplace for the Devspeak plugin: a technical English coach for Brazilian devs.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "plugins": [
     {
       "name": "devspeak",
