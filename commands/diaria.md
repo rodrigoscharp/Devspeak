@@ -2,7 +2,7 @@
 description: Practice a daily standup update in English with Sarah, the tech lead persona.
 ---
 
-# /devspeak:standup
+# /devspeak:diaria
 
 Start a Devspeak role-play session for the `daily-standup` scenario with the `sarah` persona.
 

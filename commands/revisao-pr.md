@@ -2,7 +2,7 @@
 description: Practice responding to PR review comments in English with Priya, the senior engineer persona.
 ---
 
-# /devspeak:pr-talk
+# /devspeak:revisao-pr
 
 Start a Devspeak role-play session for the `pr-review-discussion` scenario with the `priya` persona.
 

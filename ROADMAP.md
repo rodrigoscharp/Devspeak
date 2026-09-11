@@ -9,15 +9,15 @@ Plugin + marketplace scaffolding, license, base docs.
 - `devspeak-coach` skill: session rules, rubric, personas (Sarah, Marco, Priya).
 - `tech-english-vocab` skill: auto-triggered vocabulary lookups.
 - 6 scenarios: `daily-standup`, `code-walkthrough`, `pr-review-discussion`, `friday-smalltalk`, `incident-call`, `one-on-one`.
-- Commands: `/devspeak:standup`, `/devspeak:explain-code`, `/devspeak:pr-talk`, `/devspeak:smalltalk`, `/devspeak:practice`, `/devspeak:progress`.
+- Commands (Portuguese names, since English content starts *inside* the command): `/devspeak:diaria`, `/devspeak:explicar-codigo`, `/devspeak:revisao-pr`, `/devspeak:bate-papo`, `/devspeak:praticar`, `/devspeak:progresso`.
 - `scripts/progress.mjs`: local, dependency-free progress tracking (`add-session`, `summary`, `recurring`), with `node --test` coverage.
 - 50+ entry Brazilian-Portuguese-speaker common-mistakes bank.
 
 ## Phase 2 — Passive mode & spaced repetition (done)
 
 - `UserPromptSubmit` hook (`scripts/passive-log.mjs`) that quietly logs English prompts the user writes during normal Claude Code usage — **opt-in only**, via the `passive_mode` plugin option (off by default). A lightweight EN/PT stopword heuristic filters out slash commands, short text, and Portuguese prompts before anything is stored.
-- `/devspeak:english-review` — reads the unreviewed log, analyzes it against the common-mistakes bank, and feeds findings into the same `progress.mjs` recurring-mistakes tracking used by role-play sessions.
-- Spaced-repetition vocabulary (`scripts/vocab.mjs`): a simple 6-box Leitner scheme. `tech-english-vocab` automatically adds looked-up phrases; `/devspeak:vocab` quizzes whatever's due.
+- `/devspeak:revisar-ingles` — reads the unreviewed log, analyzes it against the common-mistakes bank, and feeds findings into the same `progress.mjs` recurring-mistakes tracking used by role-play sessions.
+- Spaced-repetition vocabulary (`scripts/vocab.mjs`): a simple 6-box Leitner scheme. `tech-english-vocab` automatically adds looked-up phrases; `/devspeak:vocabulario` quizzes whatever's due.
 
 ## Phase 3 — Voice practice (done)
 

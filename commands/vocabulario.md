@@ -2,7 +2,7 @@
 description: Review vocabulary flashcards due today using spaced repetition (words picked up from tech-english-vocab lookups).
 ---
 
-# /devspeak:vocab
+# /devspeak:vocabulario
 
 1. Run: `node "${CLAUDE_PLUGIN_ROOT}/scripts/vocab.mjs" due --data-dir "${CLAUDE_PLUGIN_DATA}" --limit 10`
 2. If the result is an empty array, tell the user there's nothing due right now, and that phrases get added automatically whenever they ask "how do I say X in English?" (the `tech-english-vocab` skill). Stop here.

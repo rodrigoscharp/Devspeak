@@ -23,7 +23,7 @@ target_phrases:
 
 ## Context
 
-Used by `/devspeak:smalltalk`, with a randomly chosen team member (Sarah, Marco, or Priya) playing casual water-cooler chat. This is the lowest-pressure scenario — no technical content required. The point is fluency and naturalness in informal register: contractions, short reactive phrases ("oh nice!", "same here"), and asking questions back instead of just answering.
+Used by `/devspeak:bate-papo`, with a randomly chosen team member (Sarah, Marco, or Priya) playing casual water-cooler chat. This is the lowest-pressure scenario — no technical content required. The point is fluency and naturalness in informal register: contractions, short reactive phrases ("oh nice!", "same here"), and asking questions back instead of just answering.
 
 ## What a good performance looks like
 

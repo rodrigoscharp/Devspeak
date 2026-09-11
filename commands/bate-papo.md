@@ -2,7 +2,7 @@
 description: Practice casual Friday smalltalk in English with a random teammate persona.
 ---
 
-# /devspeak:smalltalk
+# /devspeak:bate-papo
 
 Start a Devspeak role-play session for the `friday-smalltalk` scenario with a randomly chosen persona.
 

@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.4.0] - 2026-09-11
+
+### Changed — **breaking: command names**
+
+Renamed all 8 slash commands to Portuguese, so the entry point doesn't require already knowing English vocabulary. Practice content and persona dialogue are unaffected — still English.
+
+| Old | New |
+|---|---|
+| `/devspeak:standup` | `/devspeak:diaria` |
+| `/devspeak:explain-code` | `/devspeak:explicar-codigo` |
+| `/devspeak:pr-talk` | `/devspeak:revisao-pr` |
+| `/devspeak:smalltalk` | `/devspeak:bate-papo` |
+| `/devspeak:practice` | `/devspeak:praticar` |
+| `/devspeak:progress` | `/devspeak:progresso` |
+| `/devspeak:vocab` | `/devspeak:vocabulario` |
+| `/devspeak:english-review` | `/devspeak:revisar-ingles` |
+
+If you have muscle memory for the old names, update it — there are no aliases.
+
 ## [0.3.1] - 2026-09-11
 
 ### Changed

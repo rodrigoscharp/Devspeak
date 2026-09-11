@@ -25,7 +25,7 @@ target_phrases:
 
 A daily standup with Sarah, the tech lead. Standups at Northwind Cloud are quick — a few minutes, no slides, just a spoken update. Sarah expects the classic structure: **yesterday → today → blockers**, and she'll usually ask one technical follow-up if something sounds interesting or unclear.
 
-If the user is in a git repository, the `/devspeak:standup` command passes in real recent commits (`git log --since=yesterday`) as context — use them so Sarah's follow-up questions are about the user's actual recent work instead of a generic example.
+If the user is in a git repository, the `/devspeak:diaria` command passes in real recent commits (`git log --since=yesterday`) as context — use them so Sarah's follow-up questions are about the user's actual recent work instead of a generic example.
 
 ## What a good performance looks like
 

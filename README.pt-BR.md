@@ -8,7 +8,7 @@ Um plugin para Claude Code que treina devs brasileiros em inglês técnico para 
 
 A maioria das ferramentas de prática de inglês para devs é genérica. O Devspeak é diferente em dois pontos:
 
-1. **Você pratica com o seu próprio código.** `/devspeak:explain-code` e `/devspeak:pr-talk` usam o seu `git diff` real, então você ensaia explicar ou defender *o seu trabalho de verdade* — do jeito que você precisaria fazer numa daily, num PR review ou numa call de incidente.
+1. **Você pratica com o seu próprio código.** `/devspeak:explicar-codigo` e `/devspeak:revisao-pr` usam o seu `git diff` real, então você ensaia explicar ou defender *o seu trabalho de verdade* — do jeito que você precisaria fazer numa daily, num PR review ou numa call de incidente.
 2. **Feito para quem fala português.** O feedback é explicado em PT-BR por padrão, e o coach usa um banco com mais de 50 erros típicos de falantes de português (falsos cognatos, tempos verbais, preposições, ordem de substantivos, jargão de dev) para explicar *por que* algo soou estranho, não só *que* soou.
 
 Tudo roda localmente, na sua própria assinatura do Claude — sem servidor, sem API key. Seu histórico de prática fica só na sua máquina.
@@ -16,7 +16,7 @@ Tudo roda localmente, na sua própria assinatura do Claude — sem servidor, sem
 ## Exemplo de sessão
 
 ```
-> /devspeak:standup
+> /devspeak:diaria
 
 Sarah: Morning! Let's do a quick standup — what did you work on yesterday?
 
@@ -56,16 +56,18 @@ dificultar o entendimento de quem ouve.
 
 | Comando | O que faz |
 |---|---|
-| `/devspeak:standup` | Pratica uma daily standup com a Sarah (tech lead). Usa `git log --since=yesterday` como contexto se você estiver num repo git. |
-| `/devspeak:explain-code [arquivo\|--staged]` | Explica uma mudança real de código para a Sarah — mudanças não commitadas por padrão, `--staged`, ou um arquivo específico. |
-| `/devspeak:pr-talk` | Responde aos comentários de review da Priya (engenheira sênior) no seu diff atual. |
-| `/devspeak:smalltalk` | Papo casual de sexta-feira com um colega de time aleatório — sem pressão técnica. |
-| `/devspeak:practice <scenario-id>` | Vai direto para qualquer cenário. Rode sem argumento para listar todos. |
-| `/devspeak:progress` | Veja seu histórico de sessões, evolução de nível, principais erros recorrentes e sugestão do próximo cenário. |
-| `/devspeak:english-review` | Revisa prompts reais em inglês que você escreveu no uso normal (precisa do `passive_mode` ativado, veja abaixo). |
-| `/devspeak:vocab` | Testa o vocabulário que está pra revisar hoje (repetição espaçada). |
+| `/devspeak:diaria` | Pratica uma daily standup com a Sarah (tech lead). Usa `git log --since=yesterday` como contexto se você estiver num repo git. |
+| `/devspeak:explicar-codigo [arquivo\|--staged]` | Explica uma mudança real de código para a Sarah — mudanças não commitadas por padrão, `--staged`, ou um arquivo específico. |
+| `/devspeak:revisao-pr` | Responde aos comentários de review da Priya (engenheira sênior) no seu diff atual. |
+| `/devspeak:bate-papo` | Papo casual de sexta-feira com um colega de time aleatório — sem pressão técnica. |
+| `/devspeak:praticar <scenario-id>` | Vai direto para qualquer cenário. Rode sem argumento para listar todos. |
+| `/devspeak:progresso` | Veja seu histórico de sessões, evolução de nível, principais erros recorrentes e sugestão do próximo cenário. |
+| `/devspeak:revisar-ingles` | Revisa prompts reais em inglês que você escreveu no uso normal (precisa do `passive_mode` ativado, veja abaixo). |
+| `/devspeak:vocabulario` | Testa o vocabulário que está pra revisar hoje (repetição espaçada). |
 
-O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando. As frases que você pesquisa assim são adicionadas automaticamente na fila de repetição espaçada do `/devspeak:vocab`.
+Os nomes dos comandos são em português — o conteúdo da prática e as falas das personas continuam sempre em inglês, mas você não precisa saber inglês pra achar o comando certo.
+
+O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando. As frases que você pesquisa assim são adicionadas automaticamente na fila de repetição espaçada do `/devspeak:vocabulario`.
 
 ## Modo de voz (opcional)
 
@@ -87,7 +89,7 @@ Defina ao instalar, ou depois via `/plugin`:
 | `level` | `auto`, `A2`, `B1`, `B2`, `C1` | `auto` (estimado pelo seu desempenho) |
 | `correction_mode` | `end`, `inline` | `end` (feedback só no fim da sessão) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
-| `passive_mode` | `true`, `false` | `false` — **opt-in.** Quando ligado, registra silenciosamente prompts em inglês que você escreve no uso normal do Claude Code (fora de role-play), pra `/devspeak:english-review` analisar depois. |
+| `passive_mode` | `true`, `false` | `false` — **opt-in.** Quando ligado, registra silenciosamente prompts em inglês que você escreve no uso normal do Claude Code (fora de role-play), pra `/devspeak:revisar-ingles` analisar depois. |
 | `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — backend de texto-pra-fala do modo de voz (`speak()`). Sem setup pro `system`. |
 | `piper_binary_path`, `piper_voice_path` | caminhos de arquivo | — só usados se `tts_backend` for `piper`. |
 | `elevenlabs_api_key`, `elevenlabs_voice_id` | (sensível), string | — só usados se `tts_backend` for `elevenlabs`. |

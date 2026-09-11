@@ -44,7 +44,7 @@ test('captureEntry does nothing when passive mode is disabled', () => {
 test('captureEntry does nothing for slash commands', () => {
   const entry = captureEntry(dataDir, {
     passiveMode: 'true',
-    prompt: '/devspeak:standup',
+    prompt: '/devspeak:diaria',
   });
   assert.equal(entry, null);
 });

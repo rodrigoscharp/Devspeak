@@ -1,8 +1,8 @@
 ---
-description: Practice explaining a code change in English to Sarah, the tech lead persona. Usage:/devspeak:explain-code [file|--staged]
+description: Practice explaining a code change in English to Sarah, the tech lead persona. Usage:/devspeak:explicar-codigo [file|--staged]
 ---
 
-# /devspeak:explain-code
+# /devspeak:explicar-codigo
 
 Start a Devspeak role-play session for the `code-walkthrough` scenario with the `sarah` persona, using real code as the topic.
 

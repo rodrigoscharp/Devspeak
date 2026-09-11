@@ -26,7 +26,7 @@ Keep the whole answer compact — a few lines, not an essay. This is a quick loo
 
 ## After answering
 
-Add the main recommended phrase (usually the casual/Slack option, since that's what they'll actually use day-to-day) to the spaced-repetition vocabulary store, so it resurfaces later via `/devspeak:vocab`:
+Add the main recommended phrase (usually the casual/Slack option, since that's what they'll actually use day-to-day) to the spaced-repetition vocabulary store, so it resurfaces later via `/devspeak:vocabulario`:
 
 ```
 node "${CLAUDE_PLUGIN_ROOT}/scripts/vocab.mjs" add \

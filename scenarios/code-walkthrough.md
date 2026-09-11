@@ -23,7 +23,7 @@ target_phrases:
 
 ## Context
 
-Used by `/devspeak:explain-code`. The command reads a real `git diff` (uncommitted changes by default, `--staged`, or a specific file/argument) and passes it in as context. Sarah asks the user to walk her through the actual change, then asks 1–3 follow-ups grounded in the real code — not generic questions. If a line looks risky, untested, or unusual, that's fair game for a follow-up.
+Used by `/devspeak:explicar-codigo`. The command reads a real `git diff` (uncommitted changes by default, `--staged`, or a specific file/argument) and passes it in as context. Sarah asks the user to walk her through the actual change, then asks 1–3 follow-ups grounded in the real code — not generic questions. If a line looks risky, untested, or unusual, that's fair game for a follow-up.
 
 If there's no git repo and no file argument, the command should have already asked the user for a file or snippet before this scenario starts — don't proceed without real code to discuss.
 

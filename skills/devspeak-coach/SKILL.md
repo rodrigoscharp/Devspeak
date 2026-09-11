@@ -1,6 +1,6 @@
 ---
 name: devspeak-coach
-description: Runs a technical-English role-play coaching session with a fictional international teammate persona. Use whenever a devspeak command (standup, explain-code, pr-talk, smalltalk, practice) starts a scenario, or whenever the user asks to practice spoken/written technical English, role-play a work situation in English, or get feedback on their English from a session.
+description: Runs a technical-English role-play coaching session with a fictional international teammate persona. Use whenever a devspeak command (diaria, explicar-codigo, revisao-pr, bate-papo, praticar) starts a scenario, or whenever the user asks to practice spoken/written technical English, role-play a work situation in English, or get feedback on their English from a session.
 ---
 
 # Devspeak coach
@@ -11,7 +11,7 @@ All persona/scenario content is in English. Feedback explanations follow the `ex
 
 ## Inputs you need before starting
 
-A command (`/devspeak:standup`, `/devspeak:explain-code`, `/devspeak:pr-talk`, `/devspeak:smalltalk`, `/devspeak:practice`) tells you which scenario file under `${CLAUDE_PLUGIN_ROOT}/scenarios/` and which persona file under `${CLAUDE_PLUGIN_ROOT}/skills/devspeak-coach/personas/` to use. Read both files fully before starting. If a command hands you extra context (git log, git diff, a code snippet), fold it into the persona's opening line and follow-ups so the conversation is about the user's real code, not a generic example.
+A command (`/devspeak:diaria`, `/devspeak:explicar-codigo`, `/devspeak:revisao-pr`, `/devspeak:bate-papo`, `/devspeak:praticar`) tells you which scenario file under `${CLAUDE_PLUGIN_ROOT}/scenarios/` and which persona file under `${CLAUDE_PLUGIN_ROOT}/skills/devspeak-coach/personas/` to use. Read both files fully before starting. If a command hands you extra context (git log, git diff, a code snippet), fold it into the persona's opening line and follow-ups so the conversation is about the user's real code, not a generic example.
 
 Read the user's plugin config:
 - `level`: `auto` (default), `A2`, `B1`, `B2`, or `C1`. These are the only valid values — if the stored value is anything else, treat it as `auto`.

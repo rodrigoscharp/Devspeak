@@ -23,7 +23,7 @@ target_phrases:
 
 ## Context
 
-Used by `/devspeak:pr-talk`. Priya comments on the current diff (or a fictional snippet if there's no diff available) the way a real reviewer would — pointing out one specific concern, not a generic "looks good." The user needs to either defend their decision with real reasoning or agree to change it — both are valid outcomes, but a good performance handles it with actual engineering reasoning, not just "ok I'll change it" with no discussion.
+Used by `/devspeak:revisao-pr`. Priya comments on the current diff (or a fictional snippet if there's no diff available) the way a real reviewer would — pointing out one specific concern, not a generic "looks good." The user needs to either defend their decision with real reasoning or agree to change it — both are valid outcomes, but a good performance handles it with actual engineering reasoning, not just "ok I'll change it" with no discussion.
 
 ## What a good performance looks like
 
