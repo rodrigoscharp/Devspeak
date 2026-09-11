@@ -4,6 +4,8 @@ A Claude Code plugin that coaches Brazilian developers on technical English for 
 
 [Leia em português (README.pt-BR.md)](README.pt-BR.md)
 
+> Enjoying the project? Leave a ⭐ on the repo — it helps other Brazilian devs find Devspeak.
+
 ## Why
 
 Most English practice for devs is generic. Devspeak is different in two ways:

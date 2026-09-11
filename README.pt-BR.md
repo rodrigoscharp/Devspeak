@@ -4,6 +4,8 @@ Um plugin para Claude Code que treina devs brasileiros em inglês técnico para 
 
 [Read in English (README.md)](README.md)
 
+> Gostou do projeto? Deixa uma ⭐ no repositório — ajuda outros devs brasileiros a acharem o Devspeak.
+
 ## O que é isso, exatamente?
 
 Você abre o Claude Code, digita um comando, e um colega de time fictício (Sarah, tech lead americana; Priya, engenheira sênior indiana; Marco, PM português) começa uma conversa de trabalho em inglês com você — uma daily, uma PR review, um papo de sexta. Você responde em inglês (do seu jeito, com erro e tudo), e a cada resposta o Devspeak te dá uma correção rápida em português, sem quebrar o clima da conversa. No final, ele resume o que você fez bem, o que travou, e monta um mini-exercício focado no seu erro mais comum.
