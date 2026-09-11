@@ -21,12 +21,11 @@ Plugin + marketplace scaffolding, license, base docs.
 
 ## Phase 3 — Voice practice (done)
 
-- `mcp-server/`: a TypeScript MCP server (using `@modelcontextprotocol/sdk`) providing `listen()` and `speak()` tools, bundled via esbuild into a committed `dist/index.mjs` so no build step is needed to install the plugin.
-- `listen()`: **Groq Whisper as the default** backend (free API key via the `groq_api_key` sensitive userConfig field), with `whispercpp` as a fully-local/offline alternative (`whispercpp_binary_path` + `whispercpp_model_path`). Recording needs `sox` installed either way.
-- `speak()`: the OS's built-in TTS by default (`say` / PowerShell `System.Speech` / `espeak-ng`/`spd-say`), with `piper` (local) or `elevenlabs` (cloud, higher quality) as optional backends.
-- `devspeak-coach` uses `listen`/`speak` automatically when the user asks to practice "by voice" and the tools are available, falling back to text if a tool call fails.
+- **Hearing the user:** recommends Claude Code's own built-in `/voice` dictation — zero setup, no API key, works for anyone signed in with a claude.ai account. Dictated text arrives as a normal user message, so `devspeak-coach` needs no special handling for it.
+- **Hearing the persona:** `mcp-server/`, a TypeScript MCP server (`@modelcontextprotocol/sdk`, bundled via esbuild into a committed `dist/index.mjs`) providing a `speak()` tool. Uses the OS's built-in TTS by default (`say` / PowerShell `System.Speech` / `espeak-ng`/`spd-say`) — no API key — with `piper` (local) or `elevenlabs` (cloud, higher quality) as optional backends.
+- **Fallback capture (`listen()`):** for the cases `/voice` can't cover — SSH, Claude Code on the web, or Claude Code authenticated with a direct API key/Bedrock/Vertex/Foundry instead of a claude.ai login. Groq Whisper by default (free API key via `groq_api_key`), with `whispercpp` as a fully-local/offline alternative. Not the primary path — `devspeak-coach` only reaches for it if the user explicitly asks and `/voice` isn't an option for them.
+- This design was a deliberate pivot after realizing (a) Claude has no native audio input in this API/tool surface, so *some* transcription step is unavoidable if a plugin wants to own that path, but (b) Claude Code's own `/voice` already solves it for free for most users — reserving Groq/whisper.cpp for the minority of setups where `/voice` doesn't apply keeps the "no required API key" promise intact for almost everyone.
 - Pure logic (backend selection, command/request builders, output parsing) lives in plain `.mjs` and is unit-tested with `node --test`; actual audio/network I/O is a thin wrapper, verified manually via a real MCP client handshake during development.
-- This is the one place Devspeak talks to an external API by default (Groq, for transcription) — clearly opt-in (voice mode isn't used unless asked for) and documented as a trade-off against the setup friction of compiling whisper.cpp locally.
 
 ## Phase 4 — Pronunciation scoring (planned)
 

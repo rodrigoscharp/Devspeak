@@ -68,11 +68,14 @@ Devspeak also ships a `tech-english-vocab` skill that activates automatically wh
 
 ## Voice mode (optional)
 
-Any role-play command can run out loud instead of by typing — just ask for it ("let's do this by voice"). This uses an optional MCP server (`mcp-server/`) with two tools: `listen` (speech-to-text) and `speak` (text-to-speech).
+Any role-play command can run out loud instead of by typing — just ask for it ("let's do this by voice"). There are two independent halves, and neither needs an API key for most people:
 
-Setup: `listen` needs [sox](http://sox.sourceforge.net/) installed for recording, plus either a free [Groq API key](https://console.groq.com/keys) (default, `stt_backend: groq`) or a local [whisper.cpp](https://github.com/ggerganov/whisper.cpp) install (`stt_backend: whispercpp`, fully offline). `speak` works out of the box on macOS/Windows via the OS's built-in TTS; on Linux, install `espeak-ng` or `spd-say`. See [mcp-server/README.md](mcp-server/README.md) for full setup, including optional Piper (local) or ElevenLabs (cloud) voices.
+- **Hearing you:** use Claude Code's own built-in `/voice` dictation to speak your answers — zero setup, no API key, works with any claude.ai login. Devspeak just treats the dictated text like a normal typed message.
+- **Hearing the persona:** Devspeak's `speak` MCP tool reads the persona's lines out loud, using your OS's built-in TTS by default (`say` on macOS, `System.Speech` on Windows, `espeak-ng`/`spd-say` on Linux — install one of those two on Linux). No API key either.
 
-This is the only part of Devspeak that can call an external API by default (Groq, for `listen`) — everything else stays fully local. Skip the setup entirely and Devspeak just runs in text mode.
+`/voice` doesn't work over SSH, on Claude Code on the web, or when Claude Code is authenticated with a direct Anthropic API key / Bedrock / Vertex / Foundry (no claude.ai session). Only in that case, Devspeak also ships a `listen` MCP tool as a fallback capture method — it needs [sox](http://sox.sourceforge.net/) plus either a free [Groq API key](https://console.groq.com/keys) or a local [whisper.cpp](https://github.com/ggerganov/whisper.cpp) install. See [mcp-server/README.md](mcp-server/README.md) for that setup, plus optional Piper (local) or ElevenLabs (cloud) voices for `speak`.
+
+Skip all of this setup entirely and Devspeak just runs in text mode.
 
 ## Configuration
 
@@ -84,18 +87,18 @@ Set these when installing, or later via `/plugin`:
 | `correction_mode` | `end`, `inline` | `end` (feedback only at the end of the session) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
 | `passive_mode` | `true`, `false` | `false` — **opt-in.** When on, quietly logs English prompts you write during normal Claude Code usage (outside role-play), so `/devspeak:english-review` can analyze real, unprompted writing. |
-| `stt_backend` | `groq`, `whispercpp` | `groq` — speech-to-text backend for voice mode's `listen()`. See [Voice mode](#voice-mode-optional). |
-| `groq_api_key` | (sensitive) | — Groq API key, only used if `stt_backend` is `groq`. |
-| `whispercpp_binary_path`, `whispercpp_model_path` | file paths | — only used if `stt_backend` is `whispercpp`. |
-| `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — text-to-speech backend for voice mode's `speak()`. |
+| `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — text-to-speech backend for voice mode's `speak()`. No setup needed for `system`. |
 | `piper_binary_path`, `piper_voice_path` | file paths | — only used if `tts_backend` is `piper`. |
 | `elevenlabs_api_key`, `elevenlabs_voice_id` | (sensitive), string | — only used if `tts_backend` is `elevenlabs`. |
+| `stt_backend` | `groq`, `whispercpp` | `groq` — **fallback only.** Use Claude Code's built-in `/voice` dictation instead; this is just for the `listen` MCP tool, needed only when `/voice` isn't available to you (SSH, web, or a non-claude.ai auth setup). |
+| `groq_api_key` | (sensitive) | — only used by the `listen` fallback when `stt_backend` is `groq`. |
+| `whispercpp_binary_path`, `whispercpp_model_path` | file paths | — only used by the `listen` fallback when `stt_backend` is `whispercpp`. |
 
 ## Privacy
 
-Devspeak runs entirely on your machine using your existing Claude subscription. There's no backend server and no API key required for the core coaching experience. Your practice history (`progress.json`), vocabulary queue (`vocab.json`), and — only if you enable `passive_mode` — your logged prompts (`passive-log.json`) are stored locally in the plugin's data directory and are never sent anywhere by Devspeak itself. `passive_mode` is off by default; nothing is logged unless you turn it on.
+Devspeak runs entirely on your machine using your existing Claude subscription. There's no backend server and no API key required for the core coaching experience, including the recommended voice setup (`/voice` dictation + the default `system` TTS backend are both free and local/first-party). Your practice history (`progress.json`), vocabulary queue (`vocab.json`), and — only if you enable `passive_mode` — your logged prompts (`passive-log.json`) are stored locally in the plugin's data directory and are never sent anywhere by Devspeak itself. `passive_mode` is off by default; nothing is logged unless you turn it on.
 
-The one exception is **voice mode**, and only if you use it: by default, `listen()` sends your recorded audio to Groq's API for transcription (you provide your own API key). Switch `stt_backend` to `whispercpp` to keep transcription fully local instead. `speak()` stays fully local unless you explicitly configure `elevenlabs` as the `tts_backend`.
+The one exception is the `listen` **fallback** tool, and only if you're in a setup where `/voice` isn't available and choose to configure it: by default it would send recorded audio to Groq's API for transcription (using your own API key). Switch `stt_backend` to `whispercpp` to keep that fully local instead. `speak()` stays fully local unless you explicitly configure `elevenlabs` as the `tts_backend`.
 
 ## Roadmap
 

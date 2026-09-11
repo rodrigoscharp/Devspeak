@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.1] - 2026-09-11
+
+### Changed
+
+- Voice mode now recommends Claude Code's own built-in `/voice` dictation for capturing the user's spoken answers, instead of the MCP `listen()` tool — zero setup, no API key, works with any claude.ai login. `devspeak-coach` no longer calls `listen()` by default.
+- `listen()` (Groq/whisper.cpp) is now documented and described as a **fallback only**, for environments where `/voice` isn't available (SSH, Claude Code on the web, or a non-claude.ai auth setup like a direct API key/Bedrock/Vertex/Foundry).
+- Reworded the related `plugin.json` userConfig fields (`stt_backend`, `groq_api_key`, `whispercpp_binary_path`, `whispercpp_model_path`) and both READMEs to reflect the fallback framing.
+- `speak()` (text-to-speech) is unaffected and remains the primary way to hear the persona, still free/local by default via the `system` backend.
+
 ## [0.3.0] - 2026-09-11
 
 ### Added
