@@ -67,6 +67,14 @@ dificultar o entendimento de quem ouve.
 
 O Devspeak também traz a skill `tech-english-vocab`, que é ativada automaticamente sempre que você perguntar "como eu digo X em inglês?" sobre algo do trabalho — sem precisar de comando. As frases que você pesquisa assim são adicionadas automaticamente na fila de repetição espaçada do `/devspeak:vocab`.
 
+## Modo de voz (opcional)
+
+Qualquer comando de role-play pode rodar falado em vez de digitado — é só pedir ("vamos fazer isso por voz"). Isso usa um MCP server opcional (`mcp-server/`) com duas ferramentas: `listen` (fala pra texto) e `speak` (texto pra fala).
+
+Setup: `listen` precisa do [sox](http://sox.sourceforge.net/) instalado pra gravar, mais uma chave gratuita da [Groq](https://console.groq.com/keys) (padrão, `stt_backend: groq`) ou um [whisper.cpp](https://github.com/ggerganov/whisper.cpp) local (`stt_backend: whispercpp`, totalmente offline). `speak` já funciona de fábrica no macOS/Windows via TTS do sistema; no Linux, instale `espeak-ng` ou `spd-say`. Veja [mcp-server/README.md](mcp-server/README.md) pro setup completo, incluindo vozes opcionais via Piper (local) ou ElevenLabs (nuvem).
+
+Essa é a única parte do Devspeak que chama uma API externa por padrão (Groq, pro `listen`) — o resto continua 100% local. Pode pular esse setup e o Devspeak roda normal, em texto.
+
 ## Configuração
 
 Defina ao instalar, ou depois via `/plugin`:
@@ -77,10 +85,18 @@ Defina ao instalar, ou depois via `/plugin`:
 | `correction_mode` | `end`, `inline` | `end` (feedback só no fim da sessão) |
 | `explanation_language` | `pt-BR`, `en` | `pt-BR` |
 | `passive_mode` | `true`, `false` | `false` — **opt-in.** Quando ligado, registra silenciosamente prompts em inglês que você escreve no uso normal do Claude Code (fora de role-play), pra `/devspeak:english-review` analisar depois. |
+| `stt_backend` | `groq`, `whispercpp` | `groq` — backend de fala-pra-texto do modo de voz (`listen()`). Veja [Modo de voz](#modo-de-voz-opcional). |
+| `groq_api_key` | (sensível) | — chave da Groq, só usada se `stt_backend` for `groq`. |
+| `whispercpp_binary_path`, `whispercpp_model_path` | caminhos de arquivo | — só usados se `stt_backend` for `whispercpp`. |
+| `tts_backend` | `system`, `piper`, `elevenlabs` | `system` — backend de texto-pra-fala do modo de voz (`speak()`). |
+| `piper_binary_path`, `piper_voice_path` | caminhos de arquivo | — só usados se `tts_backend` for `piper`. |
+| `elevenlabs_api_key`, `elevenlabs_voice_id` | (sensível), string | — só usados se `tts_backend` for `elevenlabs`. |
 
 ## Privacidade
 
-O Devspeak roda inteiramente na sua máquina, usando a sua assinatura do Claude. Não há servidor nem API key para configurar na experiência principal (a prática por voz numa versão futura será a única exceção opt-in — veja [ROADMAP.md](ROADMAP.md)). Seu histórico de prática (`progress.json`), fila de vocabulário (`vocab.json`) e — só se você ativar o `passive_mode` — seus prompts registrados (`passive-log.json`) ficam salvos localmente no diretório de dados do plugin e nunca são enviados para lugar nenhum pelo Devspeak. `passive_mode` vem desligado por padrão; nada é registrado até você ligar.
+O Devspeak roda inteiramente na sua máquina, usando a sua assinatura do Claude. Não há servidor nem API key obrigatória na experiência principal. Seu histórico de prática (`progress.json`), fila de vocabulário (`vocab.json`) e — só se você ativar o `passive_mode` — seus prompts registrados (`passive-log.json`) ficam salvos localmente no diretório de dados do plugin e nunca são enviados para lugar nenhum pelo Devspeak. `passive_mode` vem desligado por padrão; nada é registrado até você ligar.
+
+A única exceção é o **modo de voz**, e só se você usar: por padrão, o `listen()` manda o áudio gravado pra API da Groq transcrever (você usa sua própria chave). Troque `stt_backend` pra `whispercpp` pra manter a transcrição 100% local. O `speak()` continua 100% local, a menos que você configure `elevenlabs` como `tts_backend`.
 
 ## Roadmap
 

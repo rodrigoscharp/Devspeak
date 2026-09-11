@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.0] - 2026-09-11
+
+### Added
+
+- Phase 3: voice practice.
+- `mcp-server/`: a TypeScript MCP server (`@modelcontextprotocol/sdk`), bundled via esbuild into a committed `dist/index.mjs`, exposing `listen()` (speech-to-text) and `speak()` (text-to-speech) tools.
+- STT backends: `groq` (default, needs a free `groq_api_key`) and `whispercpp` (fully local, needs `whispercpp_binary_path` + `whispercpp_model_path`). Recording via `sox`.
+- TTS backends: `system` (default — `say`/PowerShell/`espeak-ng`/`spd-say`), `piper` (local), `elevenlabs` (cloud).
+- `devspeak-coach` now runs role-play sessions by voice when asked, using `listen`/`speak` if available, with a clean fallback to text.
+- New `plugin.json` userConfig fields: `stt_backend`, `groq_api_key`, `whispercpp_binary_path`, `whispercpp_model_path`, `tts_backend`, `piper_binary_path`, `piper_voice_path`, `elevenlabs_api_key`, `elevenlabs_voice_id`.
+- `mcp-server` unit tests (`node --test`) covering config resolution, command/request builders, and fallback logic.
+
 ## [0.2.0] - 2026-09-11
 
 ### Added

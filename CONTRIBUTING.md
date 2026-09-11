@@ -60,9 +60,20 @@ To add an entry:
 ## Testing your changes
 
 ```bash
-node --test                    # run scripts/progress.mjs tests
+node --test                    # run scripts/*.mjs tests
 claude plugin validate .       # validate plugin structure
-claude --plugin-dir .          # load the plugin locally to try commands/skills
+```
+
+To try commands/skills locally, run `claude --plugin-dir /absolute/path/to/devspeak` **from a different directory** (e.g. `cd /tmp && claude --plugin-dir ~/devspeak`). Running it from inside the repo itself makes Claude Code treat the repo as both the plugin and the current project, which causes a harmless-but-confusing duplicate (and broken) load of the root `.mcp.json` outside the plugin context.
+
+If you changed anything under `mcp-server/src/`:
+
+```bash
+cd mcp-server
+npm install
+npm run typecheck
+npm test              # unit tests for pure logic (no real audio/network)
+npm run build         # rebuilds dist/index.mjs — commit this file too
 ```
 
 ## Commit style
