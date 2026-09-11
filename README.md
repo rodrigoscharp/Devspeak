@@ -13,6 +13,11 @@ Most English practice for devs is generic. Devspeak is different in two ways:
 
 Everything runs locally on your own Claude subscription — no server, no API key. Your practice history stays on your machine.
 
+## Prerequisites
+
+- [Claude Code](https://code.claude.com) installed and logged in (macOS, Linux, or Windows — cmd.exe, PowerShell, or WSL all work).
+- No extra account or key needed for day-to-day use — Devspeak runs on your normal Claude Code subscription.
+
 ## Example session
 
 ```
@@ -48,11 +53,22 @@ Sarah: Alright, let's wrap up the role-play here.
 ...
 ```
 
+Note the `[Dica rápida: ...]` correction shows up **during** the conversation, not just at the end — that's the default behavior (`correction_mode: inline`).
+
 ## Installation
 
 ```
 /plugin marketplace add rodrigoscharp/devspeak
 /plugin install devspeak@devspeak
+```
+
+### Already installed and something looks stale?
+
+Devspeak has moved fast (Portuguese command names, automatic inline correction, voice mode). If you installed a while ago, force an update:
+
+```
+/plugin marketplace update devspeak
+/reload-plugins
 ```
 
 ## Commands
@@ -105,6 +121,25 @@ Set these when installing, or later via `/plugin`:
 Devspeak runs entirely on your machine using your existing Claude subscription. There's no backend server and no API key required for the core coaching experience, including the recommended voice setup (`/voice` dictation + the default `system` TTS backend are both free and local/first-party). Your practice history (`progress.json`), vocabulary queue (`vocab.json`), and — only if you enable `passive_mode` — your logged prompts (`passive-log.json`) are stored locally in the plugin's data directory and are never sent anywhere by Devspeak itself. `passive_mode` is off by default; nothing is logged unless you turn it on.
 
 The one exception is the `listen` **fallback** tool, and only if you're in a setup where `/voice` isn't available and choose to configure it: by default it would send recorded audio to Groq's API for transcription (using your own API key). Switch `stt_backend` to `whispercpp` to keep that fully local instead. `speak()` stays fully local unless you explicitly configure `elevenlabs` as the `tts_backend`.
+
+## FAQ
+
+**Commands are in Portuguese but Sarah speaks English — is that a bug?**
+No, that's intentional. The Portuguese command name helps you find the right feature without already knowing English; the practice content itself (persona dialogue, grammar corrections) is in English because that's what you're training. The *why* behind each correction is explained in Portuguese.
+
+**Does this cost anything?**
+No. It runs on your normal Claude Code subscription — no server, no API key. The one exception is configuring voice mode in a setup where native `/voice` doesn't work (SSH, web) — that would use your own free Groq key. For most people, that never comes up.
+
+**I updated but nothing changed.**
+Run both, in order, and wait for each to finish:
+```
+/plugin marketplace update devspeak
+/reload-plugins
+```
+If it's still stale, restart Claude Code entirely.
+
+**Does it work on Windows?**
+Yes — cmd.exe, PowerShell, and WSL all work, including voice mode.
 
 ## Roadmap
 
