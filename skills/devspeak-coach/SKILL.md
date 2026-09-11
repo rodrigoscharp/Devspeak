@@ -34,13 +34,13 @@ If `level` is `auto`, start at an assumed B1 and adjust your vocabulary/pace up 
 
 ## Voice mode (optional)
 
-If the `listen` and `speak` MCP tools (from the `devspeak-voice` server) are available in this session, and the user asks to do the session "by voice", "falado", "out loud", or similar, run the role-play as a real spoken conversation instead of text:
+If the user asks to do the session "by voice", "falado", "out loud", or similar:
 
-- Call `speak` with each persona line instead of (or in addition to) printing it as text — the user should hear the persona talk.
-- Call `listen` (default 8 seconds, adjust up for scenarios that invite longer answers like `one-on-one`) to capture the user's spoken response instead of waiting for typed input. Treat the returned transcript exactly like a typed message for every rule above (level adjustment, Portuguese-input handling, inline corrections, etc.).
-- If either tool call fails (e.g. missing `sox`, no API key configured), tell the user plainly what's missing and continue the session in text mode — never let a voice-setup problem block the practice session itself.
-- Only use voice for the persona's spoken lines and the user's spoken answers; the end-of-session feedback (corrections table, etc.) should stay as regular text — it's meant to be read, not heard.
-- If the tools aren't available at all, just run the session normally in text — don't mention voice mode unprompted.
+1. **Speaking the persona's lines:** if the `speak` MCP tool (from the `devspeak-voice` server) is available, call it with each persona line so the user hears the persona talk (default `system` backend needs no setup — it's the OS's built-in TTS). If `speak` isn't available or the call fails, just continue in text and say so briefly.
+2. **Hearing the user:** the recommended way is Claude Code's own built-in `/voice` dictation (hold/tap to record, transcribes straight into the prompt box) — zero setup, no API key, works for anyone signed in with a claude.ai account. Tell the user to use it once, at the start of the voice session, if they haven't already: "You can use Claude Code's own `/voice` to dictate your answers — no setup needed." Their dictated answer then arrives as a completely normal user message; treat it exactly like typed text for every rule above.
+3. **Fallback capture:** `/voice` doesn't work over SSH, on Claude Code on the web, or when Claude Code is authenticated with a direct Anthropic API key / Bedrock / Vertex / Foundry (no claude.ai session). Only in that situation — and only if the user explicitly asks for it, since it needs `sox` plus either a Groq API key or a local whisper.cpp install — offer the `listen` MCP tool as an alternative capture method. Don't default to it or mention it unprompted; it's a fallback for a specific limitation, not the primary path.
+4. Only use voice for the persona's spoken lines and the user's spoken answers; the end-of-session feedback (corrections table, etc.) should stay as regular text — it's meant to be read, not heard.
+5. If none of this is available or relevant, just run the session normally in text — don't mention voice mode unprompted.
 
 ## Ending the session
 

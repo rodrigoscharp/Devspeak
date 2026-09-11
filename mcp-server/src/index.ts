@@ -23,15 +23,18 @@ const MIN_DURATION = 3;
 const MAX_DURATION = 30;
 const DEFAULT_DURATION = 8;
 
-const server = new McpServer({ name: 'devspeak-voice', version: '0.1.0' });
+const server = new McpServer({ name: 'devspeak-voice', version: '0.1.1' });
 
 server.registerTool(
   'listen',
   {
     description:
       'Records the user speaking through the microphone for a fixed duration and transcribes it to ' +
-      'text. Use during a Devspeak voice role-play session to capture the user\'s spoken response ' +
-      'instead of asking them to type. Requires sox to be installed for recording.',
+      'text. FALLBACK ONLY: prefer telling the user to use Claude Code\'s own built-in /voice ' +
+      'dictation instead (zero setup, no API key, works with a claude.ai login). Only use this tool ' +
+      'when /voice isn\'t available (SSH, Claude Code on the web, or Claude Code authenticated with ' +
+      'a direct API key/Bedrock/Vertex/Foundry) and the user explicitly asks for voice input anyway. ' +
+      'Requires sox for recording, plus a configured Groq API key or local whisper.cpp install.',
     inputSchema: {
       durationSeconds: z
         .number()

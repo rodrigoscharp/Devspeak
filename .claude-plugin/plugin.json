@@ -1,7 +1,7 @@
 {
   "name": "devspeak",
   "displayName": "Devspeak",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Technical English coach for Brazilian devs practicing for international remote jobs, via role-play with a fictional international team.",
   "author": {
     "name": "Rodrigo Scharp",
@@ -44,27 +44,27 @@
     },
     "stt_backend": {
       "type": "string",
-      "title": "Speech-to-text backend",
-      "description": "groq (default — needs a free groq_api_key, no local install) or whispercpp (fully local/offline, needs whispercpp_binary_path and whispercpp_model_path)",
+      "title": "Speech-to-text backend (fallback only)",
+      "description": "You normally don't need this — Claude Code's own built-in /voice dictation handles speaking to Devspeak, with no setup. Only relevant if /voice isn't available for you (SSH, Claude Code on the web, or authenticated via a direct API key/Bedrock/Vertex/Foundry instead of a claude.ai login): groq (needs a free groq_api_key) or whispercpp (fully local/offline, needs whispercpp_binary_path and whispercpp_model_path)",
       "default": "groq"
     },
     "groq_api_key": {
       "type": "string",
-      "title": "Groq API key",
-      "description": "Free API key from https://console.groq.com/keys, used by listen() when stt_backend is groq. Not needed if you use whispercpp instead.",
+      "title": "Groq API key (fallback voice input)",
+      "description": "Only needed if you're using the listen() fallback (stt_backend: groq) because Claude Code's native /voice dictation isn't available to you. Free key from https://console.groq.com/keys.",
       "sensitive": true,
       "required": false
     },
     "whispercpp_binary_path": {
       "type": "file",
-      "title": "whisper.cpp binary path",
-      "description": "Path to a compiled whisper.cpp main/whisper-cli binary. Only needed if stt_backend is whispercpp.",
+      "title": "whisper.cpp binary path (fallback voice input)",
+      "description": "Path to a compiled whisper.cpp main/whisper-cli binary. Only needed if stt_backend is whispercpp (fallback for when /voice isn't available).",
       "required": false
     },
     "whispercpp_model_path": {
       "type": "file",
-      "title": "whisper.cpp model path",
-      "description": "Path to a whisper.cpp ggml model file (e.g. ggml-base.en.bin). Only needed if stt_backend is whispercpp.",
+      "title": "whisper.cpp model path (fallback voice input)",
+      "description": "Path to a whisper.cpp ggml model file (e.g. ggml-base.en.bin). Only needed if stt_backend is whispercpp (fallback for when /voice isn't available).",
       "required": false
     },
     "tts_backend": {
